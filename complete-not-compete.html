@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete. Not Compete. | QuickLaunch + Microsoft Entra</title>
+    <meta name="description" content="Discover how QuickLaunch completes Microsoft Entra for higher education. The on-ramp to your identity highway.">
+    <meta property="og:title" content="Complete. Not Compete. | QuickLaunch">
+    <meta property="og:description" content="Why 70% of QuickLaunch customers also use Microsoft Entra.">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ql-navy: #012168;
+            --ql-yellow: #DAFF0A;
+            --ql-blue: #3B4FDE;
+            --ql-light-blue: #7082EB;
+            --ql-med-blue: #5666DC;
+            --text-white: #ffffff;
+            --text-muted: rgba(255,255,255,0.7);
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--ql-navy);
+            color: var(--text-white);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .cta-btn {
+            background: var(--ql-yellow);
+            color: var(--ql-navy);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cta-btn:hover {
+            background: #c8eb00;
+            transform: translateY(-1px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 2rem 0 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            color: var(--ql-yellow);
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: var(--ql-light-blue);
+        }
+
+        /* Visual Stage */
+        .visual-stage {
+            background: linear-gradient(135deg, rgba(59,79,222,0.2) 0%, rgba(1,33,104,0.8) 100%);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .slide {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+            width: 100%;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--ql-yellow);
+        }
+
+        .slide p {
+            font-size: 1.3rem;
+            color: var(--text-white);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .slide .big-stat {
+            font-size: 6rem;
+            font-weight: 700;
+            color: var(--ql-yellow);
+            line-height: 1;
+        }
+
+        .slide .stat-label {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .slide .metaphor {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .slide .metaphor-item {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            min-width: 200px;
+        }
+
+        .slide .metaphor-item h3 {
+            font-size: 1.2rem;
+            color: var(--ql-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .slide .metaphor-item p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .slide .gap-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Audio Player */
+        .audio-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .audio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .audio-title {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .audio-duration {
+            font-size: 0.9rem;
+            color: var(--ql-light-blue);
+        }
+
+        audio {
+            width: 100%;
+            height: 50px;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Chapter Markers */
+        .chapters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .chapter {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .chapter:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--ql-light-blue);
+        }
+
+        .chapter.active {
+            background: rgba(59,79,222,0.3);
+            border-color: var(--ql-yellow);
+        }
+
+        .chapter-time {
+            font-size: 0.8rem;
+            color: var(--ql-light-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .chapter-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--ql-blue) 0%, var(--ql-navy) 100%);
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            background: var(--ql-yellow);
+            color: var(--ql-navy);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .cta-primary:hover {
+            background: #c8eb00;
+            transform: translateY(-2px);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--text-white);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.2s;
+        }
+
+        .cta-secondary:hover {
+            border-color: var(--ql-yellow);
+            color: var(--ql-yellow);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .visual-stage {
+                padding: 2rem 1rem;
+                min-height: 300px;
+            }
+
+            .slide h2 {
+                font-size: 1.8rem;
+            }
+
+            .slide .big-stat {
+                font-size: 4rem;
+            }
+
+            .chapters {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="assets/QuickLaunch-logo-white.png" alt="QuickLaunch">
+        </div>
+        <a href="https://quicklaunch.io/demo-form/" class="cta-btn" target="_blank">Request Demo</a>
+    </header>
+
+    <div class="container">
+
+        <section class="hero">
+            <h1><span>Complete.</span> Not Compete.</h1>
+            <p class="subtitle">QuickLaunch + Microsoft Entra for Higher Education</p>
+            <p class="tagline">Listen to the 16-minute deep dive on why 70% of our customers use both.</p>
+        </section>
+
+        <!-- Visual Stage - Changes with audio -->
+        <div class="visual-stage">
+            <!-- Slide 0: Intro -->
+            <div class="slide active" data-slide="0">
+                <h2>The Question Every CIO Asks</h2>
+                <p>"If we already pay for Microsoft Entra, why do we need QuickLaunch?"</p>
+            </div>
+
+            <!-- Slide 1: Complete Not Compete -->
+            <div class="slide" data-slide="1">
+                <h2>Complete. Not Compete.</h2>
+                <p>It's not a cage match. It's about finishing a puzzle.</p>
+            </div>
+
+            <!-- Slide 2: Gap 1 - Activation -->
+            <div class="slide" data-slide="2">
+                <div class="gap-icon">🎓</div>
+                <h2>Gap 1: Activation vs Creation</h2>
+                <p>Entra creates an account. QuickLaunch gets the student ready to learn.</p>
+            </div>
+
+            <!-- Slide 3: Summary -->
+            <div class="slide" data-slide="3">
+                <div class="metaphor">
+                    <div class="metaphor-item">
+                        <h3>Microsoft Entra</h3>
+                        <p>Database Entry</p>
+                    </div>
+                    <div class="metaphor-item">
+                        <h3>QuickLaunch</h3>
+                        <p>Onboarding Journey</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Gap 2 - MFA -->
+            <div class="slide" data-slide="4">
+                <div class="gap-icon">📵</div>
+                <h2>Gap 2: The No-Phone Problem</h2>
+                <p>Testing centers ban phones. Entra requires phones for MFA. QuickLaunch offers alternatives.</p>
+            </div>
+
+            <!-- Slide 5: Gap 3 - Sync Delay -->
+            <div class="slide" data-slide="5">
+                <div class="gap-icon">⏱️</div>
+                <h2>Gap 3: The 30-Minute Problem</h2>
+                <p>Entra Connect polls every 30 minutes. In a ransomware attack, that's a lifetime. QuickLaunch syncs instantly.</p>
+            </div>
+
+            <!-- Slide 6: Gap 4 - Lifecycle -->
+            <div class="slide" data-slide="6">
+                <div class="gap-icon">📅</div>
+                <h2>Gap 4: Lifecycle Logic</h2>
+                <p>Entra understands hired/fired. QuickLaunch understands semesters, drop/add, and FERPA.</p>
+            </div>
+
+            <!-- Slide 7: The Metaphor -->
+            <div class="slide" data-slide="7">
+                <h2>The Highway & The On-Ramp</h2>
+                <div class="metaphor">
+                    <div class="metaphor-item">
+                        <h3>Microsoft Entra</h3>
+                        <p>The Highway</p>
+                    </div>
+                    <div class="metaphor-item">
+                        <h3>QuickLaunch</h3>
+                        <p>The On-Ramp</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: 70% Stat -->
+            <div class="slide" data-slide="8">
+                <div class="big-stat">70%</div>
+                <p class="stat-label">of QuickLaunch customers also use Microsoft Entra</p>
+            </div>
+
+            <!-- Slide 9: Deployment Models -->
+            <div class="slide" data-slide="9">
+                <h2>Two Deployment Models</h2>
+                <div class="metaphor">
+                    <div class="metaphor-item">
+                        <h3>Entra-Centric</h3>
+                        <p>QuickLaunch handles activation, Entra handles SSO</p>
+                    </div>
+                    <div class="metaphor-item">
+                        <h3>QuickLaunch-Centric</h3>
+                        <p>QuickLaunch owns lifecycle, Entra is downstream</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: AI Agents -->
+            <div class="slide" data-slide="10">
+                <div class="gap-icon">🤖</div>
+                <h2>Identity for AI Agents</h2>
+                <p>Coming Q1 2026: How do you verify the identity of code? QuickLaunch is building the framework.</p>
+            </div>
+
+            <!-- Slide 11: 3-Point Pitch -->
+            <div class="slide" data-slide="11">
+                <h2>The 3-Point Pitch</h2>
+                <p>1. Highway & On-Ramp<br>2. Students Are Not Employees<br>3. We Plug the Security Holes</p>
+            </div>
+
+            <!-- Slide 12: Closing -->
+            <div class="slide" data-slide="12">
+                <h2>Complete. Not Compete.</h2>
+                <p>You're not buying a competitor. You're buying the completion of your stack.</p>
+            </div>
+        </div>
+
+        <!-- Audio Player -->
+        <div class="audio-section">
+            <div class="audio-header">
+                <span class="audio-title">DeepDive Episode 5: Why Entra Needs QuickLaunch for Higher Ed</span>
+                <span class="audio-duration">16:44</span>
+            </div>
+            <audio id="audioPlayer" controls>
+                <source src="assets/episode-5-entra-quicklaunch.m4a" type="audio/mp4">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- Chapter Markers -->
+        <div class="chapters">
+            <div class="chapter active" data-time="0" data-slide="0">
+                <div class="chapter-time">0:00</div>
+                <div class="chapter-title">The Question</div>
+            </div>
+            <div class="chapter" data-time="106" data-slide="1">
+                <div class="chapter-time">1:46</div>
+                <div class="chapter-title">Complete, Not Compete</div>
+            </div>
+            <div class="chapter" data-time="157" data-slide="2">
+                <div class="chapter-time">2:37</div>
+                <div class="chapter-title">Gap 1: Activation</div>
+            </div>
+            <div class="chapter" data-time="300" data-slide="3">
+                <div class="chapter-time">5:00</div>
+                <div class="chapter-title">Directory vs Journey</div>
+            </div>
+            <div class="chapter" data-time="317" data-slide="4">
+                <div class="chapter-time">5:17</div>
+                <div class="chapter-title">Gap 2: MFA</div>
+            </div>
+            <div class="chapter" data-time="466" data-slide="5">
+                <div class="chapter-time">7:46</div>
+                <div class="chapter-title">Gap 3: Sync Delay</div>
+            </div>
+            <div class="chapter" data-time="561" data-slide="6">
+                <div class="chapter-time">9:21</div>
+                <div class="chapter-title">Gap 4: Lifecycle</div>
+            </div>
+            <div class="chapter" data-time="610" data-slide="7">
+                <div class="chapter-time">10:10</div>
+                <div class="chapter-title">Highway Metaphor</div>
+            </div>
+            <div class="chapter" data-time="678" data-slide="8">
+                <div class="chapter-time">11:18</div>
+                <div class="chapter-title">70% Stat</div>
+            </div>
+            <div class="chapter" data-time="720" data-slide="9">
+                <div class="chapter-time">12:00</div>
+                <div class="chapter-title">Deployment Models</div>
+            </div>
+            <div class="chapter" data-time="786" data-slide="10">
+                <div class="chapter-time">13:06</div>
+                <div class="chapter-title">AI Agents</div>
+            </div>
+            <div class="chapter" data-time="894" data-slide="11">
+                <div class="chapter-time">14:54</div>
+                <div class="chapter-title">3-Point Pitch</div>
+            </div>
+            <div class="chapter" data-time="956" data-slide="12">
+                <div class="chapter-time">15:56</div>
+                <div class="chapter-title">Closing</div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to Complete Your Identity Stack?</h2>
+            <p>See how QuickLaunch makes Microsoft Entra work for higher education.</p>
+            <div class="cta-buttons">
+                <a href="https://quicklaunch.io/demo-form/" class="cta-primary" target="_blank">Request a Demo</a>
+                <a href="https://quicklaunch.io" class="cta-secondary" target="_blank">Learn More</a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>QuickLaunch — AI-powered integration & identity for higher education</p>
+    </footer>
+
+    <script>
+        const audio = document.getElementById('audioPlayer');
+        const slides = document.querySelectorAll('.slide');
+        const chapters = document.querySelectorAll('.chapter');
+
+        // Timestamp to slide mapping (in seconds)
+        const timestamps = [
+            { time: 0, slide: 0 },
+            { time: 106, slide: 1 },   // 1:46
+            { time: 157, slide: 2 },   // 2:37
+            { time: 300, slide: 3 },   // 5:00
+            { time: 317, slide: 4 },   // 5:17
+            { time: 466, slide: 5 },   // 7:46
+            { time: 561, slide: 6 },   // 9:21
+            { time: 610, slide: 7 },   // 10:10
+            { time: 678, slide: 8 },   // 11:18
+            { time: 720, slide: 9 },   // 12:00
+            { time: 786, slide: 10 },  // 13:06
+            { time: 894, slide: 11 },  // 14:54
+            { time: 956, slide: 12 }   // 15:56
+        ];
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            chapters.forEach((chapter, i) => {
+                chapter.classList.toggle('active', i === index);
+            });
+        }
+
+        // Sync visuals with audio playback
+        audio.addEventListener('timeupdate', () => {
+            const currentTime = audio.currentTime;
+
+            // Find the current slide based on timestamp
+            let currentSlide = 0;
+            for (let i = timestamps.length - 1; i >= 0; i--) {
+                if (currentTime >= timestamps[i].time) {
+                    currentSlide = timestamps[i].slide;
+                    break;
+                }
+            }
+
+            showSlide(currentSlide);
+        });
+
+        // Click on chapter to jump to that time
+        chapters.forEach((chapter, index) => {
+            chapter.addEventListener('click', () => {
+                const time = parseInt(chapter.dataset.time);
+                audio.currentTime = time;
+                audio.play();
+                showSlide(index);
+            });
+        });
+    </script>
+
+</body>
+</html>
